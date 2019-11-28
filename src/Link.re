@@ -3,17 +3,17 @@ let component = ReasonReact.statelessComponent("Link");
 let make = (~href, ~className="", children) => {
   ...component,
   render: self =>
-    ReasonReact.createDomElement(
+    ReactDOMRe.createElementVariadic(
       "a",
-      ~props={
+      ~props=(ReactDOMRe.objToDOMProps({
         "className": className,
         "href": href,
         "onClick":
           self.handle((event, _self) => {
-            ReactEventRe.Mouse.preventDefault(event);
+            event->ReactEvent.Mouse.preventDefault;
             ReasonReact.Router.push(href);
           })
-      },
+      })),
       children
     )
 };
